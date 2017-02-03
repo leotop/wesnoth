@@ -16,6 +16,7 @@
 
 #define GETTEXT_DOMAIN "wesnoth"
 
+#include "gettext.hpp"
 #include "gui/auxiliary/find_widget.hpp"
 #include "gui/widgets/addon_list.hpp"
 #include "gui/widgets/label.hpp"
@@ -33,10 +34,9 @@ REGISTER_DIALOG(install_dependencies)
 void install_dependencies::pre_show(window& window)
 {
 	label& lbl = find_widget<label>(&window, "label", false);
-	lbl.set_label(t_string("The selected add-on has the following dependency, which is not currently installed. Do you wish to install it before continuing?",
+	lbl.set_label(t_string(_n("The selected add-on has the following dependency, which is not currently installed. Do you wish to install it before continuing?",
 		"The selected add-on has the following dependencies, which are not currently installed. Do you wish to install them before continuing?",
-		addons_.size(),
-		"wesnoth"));
+		addons_.size())));
 
 	addon_list& list = find_widget<addon_list>(&window, "dependencies", false);
 	list.set_addons(addons_);
